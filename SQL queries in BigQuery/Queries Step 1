@@ -1,0 +1,15 @@
+-- Cleaning Data
+
+SELECT
+  patient_id,
+  owner_id,
+  owner_name,
+  pet_type,
+  COALESCE(NULLIF(TRIM(breed), ''), 'Unknown') AS breed,
+  UPPER(patient_name) AS patient_name,
+  gender,
+  patient_age,
+  date_registration,
+  REGEXP_REPLACE(owner_phone, r'[^0-9]', '') AS owner_phone
+FROM  `refined-veld-457117-j3.health_tail.healthtail_reg_cards`
+ LIMIT 1000;
