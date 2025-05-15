@@ -1,0 +1,52 @@
+-- Created Aggregated Tables
+
+WITH medications_received AS (
+  SELECT
+    month_invoice AS month,
+    med_name,
+    SUM(packs) AS total_packs,
+    SUM(total_price) AS total_value,
+    'stock in' AS stock_movement
+  FROM
+    `refined-veld-457117-j3.health_tail.invoices`
+  GROUP BY
+    month,
+    med_name),
+  medications_spent AS ( 
+    SELECT
+    DATE_TRUNC(visit_datetime, MONTH) AS month,
+    med_prescribed AS med_name,
+    SUM(med_dosage) AS total_packs,
+    SUM(med_cost) AS total_value,
+    'stock out' AS stock_movement
+  FROM
+    `refined-veld-457117-j3.health_tail.visits`
+  WHERE
+    med_prescribed IS NOT NULL
+  GROUP BY
+    month,
+    med_name)
+SELECT
+  month,
+  med_name,
+  CAST(total_packs AS NUMERIC) AS total_packs,
+  CAST(total_value AS NUMERIC) AS total_value,
+  stock_movement
+FROM
+  medications_received
+UNION ALL
+SELECT
+  month,
+  med_name,
+  CAST(total_packs AS NUMERIC) AS total_packs,
+  CAST(total_value AS NUMERIC) AS total_value,
+  stock_movement
+FROM
+  medications_spent
+ORDER BY
+  month,
+  med_name,
+  stock_movement
+  LIMIT 1000;
+
+
