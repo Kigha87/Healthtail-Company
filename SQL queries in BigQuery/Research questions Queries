@@ -1,0 +1,63 @@
+-- 1.What med did we spend the most money on in total?
+SELECT
+  med_name,
+  SUM(total_value) AS total_cost_spent_on_med
+FROM
+  `refined-veld-457117-j3.health_tail.med_audit`
+WHERE
+  stock_movement = 'stock out'
+GROUP BY
+  med_name
+ORDER BY
+  total_cost_spent_on_med DESC
+LIMIT 1;
+----------------------------------------------------------------------------------------------------
+
+-- 2.What med had the highest monthly total_value spent on patients? At what month?
+SELECT
+  month,
+  med_name,
+  total_value AS highest_monthly_cost_spent_on_med
+FROM
+  `refined-veld-457117-j3.health_tail.med_audit`
+WHERE
+  stock_movement = 'stock out'
+ORDER BY
+  highest_monthly_cost_spent_on_med DESC
+LIMIT 1;
+------------------------------------------------------------------------------------------------------
+
+-- 3.What month was the highest in packs of meds spent in vet clinic?
+
+SELECT
+  month,
+  SUM(total_packs) AS total_packs_spent_in_month
+FROM
+   `refined-veld-457117-j3.health_tail.med_audit`
+WHERE
+  stock_movement = 'stock out'
+GROUP BY
+  month
+ORDER BY
+  total_packs_spent_in_month DESC
+LIMIT 1;
+----------------------------------------------------------------------------------------------------------
+
+-- 4. What's an average monthly spent in packs of the med that generated the most revenue?
+
+WITH Med_with_highest_value_spent AS (
+  SELECT
+      ma.med_name
+  FROM `refined-veld-457117-j3.health_tail.med_audit` ma
+  WHERE ma.stock_movement = 'stock_in'
+  GROUP BY ma.med_name
+  ORDER BY
+      SUM(ma.total_value) DESC
+      LIMIT 1
+)
+  SELECT
+    AVG(ma.total_packs) AS average_monthly_packs_spent
+  FROM `refined-veld-457117-j3.health_tail.med_audit` ma
+  WHERE ma.med_name = (SELECT med_name FROM Med_with_highest_value_spent) 
+  AND ma.stock_movement = 'stock in';
+
