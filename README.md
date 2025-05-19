@@ -62,24 +62,39 @@ Required a tool to monitor the most common diagnose, track the prevalence of dis
 
 
 ## **DASHBOARD.**
-
-
-
-
-
-
 **Looker Studio Link**
 
 
 
 ## **INSIGHTS.**
 
+1. Top Diagnoses by pet_type:
+    - Dogs are most affected by cancer, arthritis, and allergies.
+    - Cats show high frequency of Progressive Retinal Atrophy and HCM.
+    - Hamsters are mostly diagnosed with hypothyroidism and ringworm.
 
+2. Breed-Level Susceptibility:
+   - Beagles and Bengals show high cases of UTI, worms, and hypothyroidism.
+   - Certain breeds show repeated diagnoses of chronic conditions.
+
+3. High-Spending Conditions:
+   - Cancer leads total cost, followed by HCM and Arthritis.
+   - These diseases are both frequent and expensive, highlighting chronic management needs.
+
+4. Age vs Disease Patterns
+   - Pets above 10+ years show higher rates of arthritis, cancer, and HCM.
+   - Young pets from 0-1 years are more prone to infections like UTI, fleas.
+
+5. Seasonal Medication Costs:
+   - Medication spending spikes periodically, indicating seasonal patterns in disease outbreaks.
 
 
 ## **RECOMMENDATIONS.**
 
-
+- Preventive campaigns by age and breed to target senior pets and high-risk breeds with early screening with arthritis and cancer.
+- Breed risk index development to leverage diagnosis trends to create a risk-scoring model by breed to support pricing and targeted care.
+- Seasonal awareness campaigns use historical spending and disease frequency trends to launch seasonal health alerts and medication offers.
+- Subscription plans for chronic care offer bundled services for managing high-cost diseases like cancer and arthritis.
 
 
 
