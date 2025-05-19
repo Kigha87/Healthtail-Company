@@ -62,7 +62,7 @@ Required a tool to monitor the most common diagnose, track the prevalence of dis
 
 
 ## **DASHBOARD.**
-**Looker Studio Link**
+[Looker Studio Link](https://lookerstudio.google.com/reporting/0f8a0b5d-a66b-4783-a2f9-9d5c4e14216e)
 
 
 
